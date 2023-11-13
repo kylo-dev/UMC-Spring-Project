@@ -3,10 +3,7 @@ package umc.spring.domain;
 import lombok.*;
 import umc.spring.domain.common.BaseEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,4 +22,8 @@ public class Mission extends BaseEntity {
     private LocalDateTime deadline;
 
     private String missionSpec;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
 }
