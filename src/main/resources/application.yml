@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/umc_database
-    username: umc_study
+    url: jdbc:mysql://localhost:3306/umc_db
+    username: umc_kylo
     password: 3677
     driver-class-name: com.mysql.cj.jdbc.Driver
   sql:
