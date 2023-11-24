@@ -18,7 +18,7 @@ public class TempRestController {
     private final TempQueryService tempQueryService;
 
     @GetMapping("/test")
-    public ApiResponse<TempResponse.TempTestDTO>  testAPI(){
+    public ApiResponse<TempResponse.TempTestDTO> testAPI(){
         return ApiResponse.onSuccess(TempConverter.toTempTestDTO());
     }
 

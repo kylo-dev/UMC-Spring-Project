@@ -1,4 +1,4 @@
-package umc.spring.exception.handler;
+package umc.spring.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
