@@ -1,4 +1,4 @@
-package umc.spring.exception;
+package umc.spring.apiPayload.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
