@@ -35,6 +35,9 @@ public class Store extends BaseEntity {
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     List<Mission> missionList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    List<Review> reviewList = new ArrayList<>();
+
 
     //== 연관관계 편의 메소드 ==//
     public void setRegion(Region region){

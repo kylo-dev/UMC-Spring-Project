@@ -4,6 +4,7 @@ import lombok.*;
 import umc.spring.domain.common.BaseEntity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,4 +25,22 @@ public class Review extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
+
+    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
+    private List<ReviewImage> reviewImageList;
+
+    //== 연관관계 메서드 ==//
+    public void setMember(Member member){
+        this.member = member;
+        member.getReviewList().add(this);
+    }
+
+    public void setStore(Store store){
+        this.store = store;
+        store.getReviewList().add(this);
+    }
 }
