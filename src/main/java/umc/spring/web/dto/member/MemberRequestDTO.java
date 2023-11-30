@@ -1,4 +1,4 @@
-package umc.spring.web.dto;
+package umc.spring.web.dto.member;
 
 import lombok.Getter;
 import umc.spring.validation.annotation.ExistCategories;
