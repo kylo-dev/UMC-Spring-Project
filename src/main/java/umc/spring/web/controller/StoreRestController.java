@@ -1,10 +1,7 @@
 package umc.spring.web.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
 import umc.spring.converter.StoreConverter;
 import umc.spring.domain.Store;
@@ -23,5 +20,11 @@ public class StoreRestController {
     public ApiResponse<StoreResponseDTO.RegisterResultDTO> register(@RequestBody StoreRequestDTO.RegisterRegionDTO request){
         Store store = storeCommandService.registerStore(request);
         return ApiResponse.onSuccess(StoreConverter.toRegisterResultDTO(store));
+    }
+
+    @PatchMapping("/missions")
+    public ApiResponse<StoreResponseDTO.RegisterMissionResultDTO> registerMission(@RequestBody StoreRequestDTO.RegisterMissionDTO request){
+        storeCommandService.registerMission(request);
+        return ApiResponse.onSuccess(StoreConverter.toRegisterMissionResultDTO(request));
     }
 }

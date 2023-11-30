@@ -6,4 +6,5 @@ import umc.spring.web.dto.store.StoreRequestDTO;
 public interface StoreCommandService {
 
     Store registerStore(StoreRequestDTO.RegisterRegionDTO request);
+    void registerMission(StoreRequestDTO.RegisterMissionDTO request);
 }

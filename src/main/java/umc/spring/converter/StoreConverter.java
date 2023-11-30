@@ -16,6 +16,14 @@ public class StoreConverter {
                 .build();
     }
 
+    public static StoreResponseDTO.RegisterMissionResultDTO toRegisterMissionResultDTO(StoreRequestDTO.RegisterMissionDTO request){
+        return StoreResponseDTO.RegisterMissionResultDTO.builder()
+                .storeId(request.getStoreId())
+                .missionId(request.getMissionId())
+                .createAt(LocalDateTime.now())
+                .build();
+    }
+
     public static Store toStore(StoreRequestDTO.RegisterRegionDTO request) {
 
         // Region 연관관계 설정해주어야 함.
