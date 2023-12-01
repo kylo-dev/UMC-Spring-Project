@@ -5,13 +5,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.apiPayload.exception.handler.FoodCategoryHandler;
+import umc.spring.apiPayload.exception.handler.MemberHandler;
+import umc.spring.apiPayload.exception.handler.MissionHandler;
 import umc.spring.converter.MemberConverter;
 import umc.spring.converter.MemberPreferConverter;
 import umc.spring.domain.FoodCategory;
 import umc.spring.domain.Member;
+import umc.spring.domain.Mission;
+import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.MemberPrefer;
 import umc.spring.repository.FoodCategoryRepository;
+import umc.spring.repository.MemberMissionRepository;
 import umc.spring.repository.MemberRepository;
+import umc.spring.repository.MissionRepository;
 import umc.spring.web.dto.member.MemberRequestDTO;
 
 import java.util.List;
@@ -24,6 +30,8 @@ public class MemberCommandServiceImpl implements MemberCommandService{
 
     private final MemberRepository memberRepository;
     private final FoodCategoryRepository foodCategoryRepository;
+    private final MissionRepository missionRepository;
+    private final MemberMissionRepository memberMissionRepository;
 
     @Override
     @Transactional
@@ -42,9 +50,33 @@ public class MemberCommandServiceImpl implements MemberCommandService{
                 }).collect(Collectors.toList());
 
         List<MemberPrefer> memberPreferList = MemberPreferConverter.toMemberPerferList(foodCategoryList);
-        memberPreferList.forEach(memberPrefer -> {memberPrefer.setMember(newMember);});
+        for (MemberPrefer memberPrefer : memberPreferList) {
+            memberPrefer.setMember(newMember);
+        }
 
         // membmer의 cascade.all 을 통해 member 저장시 memberPrefer도 같이 저장
         return memberRepository.save(newMember);
+    }
+
+    @Override
+    @Transactional
+    public MemberMission performMission(MemberRequestDTO.MissionDTO request) {
+
+        // 유저 조회
+        Member findMember = memberRepository.findById(request.getMemberId()).orElseThrow(
+                ()-> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND)
+        );
+
+        // 미션 조회
+        Mission findMission = missionRepository.findById(request.getMissionId()).orElseThrow(
+                () -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND)
+        );
+
+        MemberMission memberMission = MemberMission.builder()
+                .member(findMember)
+                .mission(findMission)
+                .build();
+
+        return memberMissionRepository.save(memberMission);
     }
 }

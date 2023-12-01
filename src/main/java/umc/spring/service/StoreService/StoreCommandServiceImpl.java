@@ -55,7 +55,7 @@ public class StoreCommandServiceImpl implements StoreCommandService{
 
         // 등록할 미션 조회
         Mission mission = missionRepository.findById(request.getMissionId()).orElseThrow(
-                ()-> new MissionHandler(ErrorStatus.MISSON_NOT_FOUND)
+                ()-> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND)
         );
 
         // 연관관계 설정 - 더티 체킹으로 업데이트 처리

@@ -34,7 +34,4 @@ public class MemberPrefer extends BaseEntity {
         member.getMemberPreferList().add(this);
     }
 
-    public void setFoodCategory(FoodCategory foodCategory){
-        this.foodCategory = foodCategory;
-    }
 }

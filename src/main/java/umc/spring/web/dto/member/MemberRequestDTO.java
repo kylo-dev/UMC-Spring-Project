@@ -2,6 +2,7 @@ package umc.spring.web.dto.member;
 
 import lombok.Getter;
 import umc.spring.validation.annotation.ExistCategories;
+import umc.spring.validation.annotation.ExistMission;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -30,7 +31,6 @@ public class MemberRequestDTO {
         String address;
         @Size(min = 5, max=12)
         String specAddress;
-
         /**
          * List<Long>인 이유
          * 음식 카테고리를 조회하는 API를 호출하고,
@@ -38,5 +38,15 @@ public class MemberRequestDTO {
          */
         @ExistCategories
         List<Long> preferCategory;
+    }
+
+    @Getter
+    @ExistMission
+    public static class MissionDTO{
+        @NotNull
+        Long memberId;
+
+        @NotNull
+        Long missionId;
     }
 }
