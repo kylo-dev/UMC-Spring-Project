@@ -14,6 +14,8 @@ import umc.spring.web.dto.review.ReviewResponseDTO;
 import umc.spring.web.dto.store.StoreRequestDTO;
 import umc.spring.web.dto.store.StoreResponseDTO;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/stores")
@@ -36,7 +38,7 @@ public class StoreRestController {
     }
 
     @PatchMapping("/reviews")
-    public ApiResponse<ReviewResponseDTO.RegisterResultDTO> registerReview(@RequestBody ReviewRequestDTO.RegisterDTO request){
+    public ApiResponse<ReviewResponseDTO.RegisterResultDTO> registerReview(@RequestBody @Valid ReviewRequestDTO.RegisterDTO request){
         Review review = reviewCommandService.registerReview(request);
         return ApiResponse.onSuccess(ReviewConverter.toRegisterReviewResultDTO(review));
     }
