@@ -24,8 +24,6 @@ public class StoreCommandServiceImpl implements StoreCommandService{
     private final StoreRepository storeRepository;
     private final RegionRepository regionRepository;
     private final MissionRepository missionRepository;
-    private final MemberRepository memberRepository;
-    private final ReviewRepository reviewRepository;
 
     @Override
     @Transactional
@@ -62,4 +60,8 @@ public class StoreCommandServiceImpl implements StoreCommandService{
         mission.setStore(store);
     }
 
+    @Override
+    public boolean exsistStore(Long storeId) {
+        return storeRepository.existsById(storeId);
+    }
 }

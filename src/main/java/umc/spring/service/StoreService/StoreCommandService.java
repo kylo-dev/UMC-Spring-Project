@@ -10,5 +10,5 @@ public interface StoreCommandService {
 
     Store registerStore(StoreRequestDTO.RegisterRegionDTO request);
     void registerMission(StoreRequestDTO.RegisterMissionDTO request);
-//    Review registerReview(ReviewRequestDTO.RegisterDTO request);
+    boolean exsistStore(Long storeId);
 }

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.repository.StoreRepository;
+import umc.spring.service.StoreService.StoreCommandService;
 import umc.spring.validation.annotation.ExistStore;
 
 import javax.validation.ConstraintValidator;
@@ -13,7 +14,7 @@ import javax.validation.ConstraintValidatorContext;
 @RequiredArgsConstructor
 public class StoreExistValidator implements ConstraintValidator<ExistStore, Long> {
 
-    private final StoreRepository storeRepository;
+    private final StoreCommandService storeCommandService;
 
     @Override
     public void initialize(ExistStore constraintAnnotation) {
@@ -22,7 +23,7 @@ public class StoreExistValidator implements ConstraintValidator<ExistStore, Long
 
     @Override
     public boolean isValid(Long storeId, ConstraintValidatorContext context) {
-        boolean isValid = storeRepository.existsById(storeId);
+        boolean isValid = storeCommandService.exsistStore(storeId);
 
         if (!isValid){
             context.disableDefaultConstraintViolation();
