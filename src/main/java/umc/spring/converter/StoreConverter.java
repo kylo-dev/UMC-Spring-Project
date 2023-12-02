@@ -1,5 +1,6 @@
 package umc.spring.converter;
 
+import umc.spring.domain.Mission;
 import umc.spring.domain.Store;
 import umc.spring.web.dto.store.StoreRequestDTO;
 import umc.spring.web.dto.store.StoreResponseDTO;
@@ -16,10 +17,10 @@ public class StoreConverter {
                 .build();
     }
 
-    public static StoreResponseDTO.RegisterMissionResultDTO toRegisterMissionResultDTO(StoreRequestDTO.RegisterMissionDTO request){
+    public static StoreResponseDTO.RegisterMissionResultDTO toRegisterMissionResultDTO(Mission mission){
         return StoreResponseDTO.RegisterMissionResultDTO.builder()
-                .storeId(request.getStoreId())
-                .missionId(request.getMissionId())
+                .storeId(mission.getStore().getId())
+                .missionId(mission.getId())
                 .createAt(LocalDateTime.now())
                 .build();
     }

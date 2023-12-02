@@ -10,9 +10,12 @@ public class MissionRequestDTO {
 
     @Getter
     public static class RegisterDTO{
+
         Integer reward;
+
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         LocalDateTime deadline;
+
         @NotNull
         String missionSpec;
     }

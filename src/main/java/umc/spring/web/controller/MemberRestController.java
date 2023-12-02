@@ -1,6 +1,7 @@
 package umc.spring.web.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import umc.spring.converter.MemberConverter;
 import umc.spring.domain.Member;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.service.MemberService.MemberCommandService;
+import umc.spring.validation.annotation.ExistMission;
 import umc.spring.web.dto.member.MemberRequestDTO;
 import umc.spring.web.dto.member.MemberResponseDTO;
 
@@ -17,6 +19,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 @RequestMapping("/members")
 public class MemberRestController {
 
@@ -29,7 +32,7 @@ public class MemberRestController {
     }
 
     @PostMapping("/missions")
-    public ApiResponse<MemberResponseDTO.MissionResultDTO> missionPerform(@RequestBody @Valid MemberRequestDTO.MissionDTO request){
+    public ApiResponse<MemberResponseDTO.MissionResultDTO> missionPerform(@RequestBody @ExistMission MemberRequestDTO.MissionDTO request){
         MemberMission memberMission = memberCommandService.performMission(request);
         return ApiResponse.onSuccess(MemberConverter.toMissionResultDTO(memberMission));
     }

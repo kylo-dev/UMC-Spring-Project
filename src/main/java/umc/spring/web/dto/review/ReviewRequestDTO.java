@@ -12,8 +12,7 @@ public class ReviewRequestDTO {
 
     @Getter
     public static class RegisterDTO {
-        @ExistStore
-        Long storeId;
+
         @NotNull
         Long memberId;
         @NotNull

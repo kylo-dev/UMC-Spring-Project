@@ -19,6 +19,7 @@ public class MissionRestController {
 
     private final MissionCommandService missionCommandService;
 
+    // 미션 등록 API - 가게 정보 없이, 미션 생성 하는 API
     @PostMapping("/")
     public ApiResponse<MissionResponseDTO.RegisterResultDTO> registerMission(@RequestBody MissionRequestDTO.RegisterDTO request){
         Mission mission = missionCommandService.registerMission(request);

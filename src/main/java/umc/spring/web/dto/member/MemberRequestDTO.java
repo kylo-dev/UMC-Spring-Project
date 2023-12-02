@@ -41,7 +41,6 @@ public class MemberRequestDTO {
     }
 
     @Getter
-    @ExistMission
     public static class MissionDTO{
         @NotNull
         Long memberId;

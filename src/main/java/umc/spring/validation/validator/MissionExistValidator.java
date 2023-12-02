@@ -2,7 +2,7 @@ package umc.spring.validation.validator;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import umc.spring.apiPayload.code.status.ErrorStatus;V
+import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.service.MemberMissionService.MemberMissionCommandService;
 import umc.spring.validation.annotation.ExistMission;
 import umc.spring.web.dto.member.MemberRequestDTO;
