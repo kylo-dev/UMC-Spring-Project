@@ -27,7 +27,7 @@ public class ReviewConverter {
                 .build();
     }
 
-    public static ReviewResponseDTO.ReviewPreViewDTO reviewPreViewDTO(Review review){
+    public static ReviewResponseDTO.ReviewPreViewDTO toReviewPreViewDTO(Review review){
         return ReviewResponseDTO.ReviewPreViewDTO.builder()
                 .ownerNickname(review.getMember().getName())
                 .score(review.getScore())
@@ -36,10 +36,10 @@ public class ReviewConverter {
                 .build();
     }
 
-    public static ReviewResponseDTO.ReviewPreViewListDTO reviewPreViewListDTO(Page<Review> reviewList){
+    public static ReviewResponseDTO.ReviewPreViewListDTO toReviewPreViewListDTO(Page<Review> reviewList){
 
         List<ReviewResponseDTO.ReviewPreViewDTO> reviewPreViewDTOList = reviewList.stream()
-                .map(ReviewConverter::reviewPreViewDTO)
+                .map(ReviewConverter::toReviewPreViewDTO)
                 .collect(Collectors.toList());
 
         return ReviewResponseDTO.ReviewPreViewListDTO.builder()

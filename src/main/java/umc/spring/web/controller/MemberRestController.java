@@ -72,6 +72,6 @@ public class MemberRestController {
                                                                              @CheckPage @RequestParam(name = "page") Integer page){
         Page<Review> reviewList = memberQueryService.getReviewList(memberId, page-1);
 
-        return ApiResponse.onSuccess(ReviewConverter.reviewPreViewListDTO(reviewList));
+        return ApiResponse.onSuccess(ReviewConverter.toReviewPreViewListDTO(reviewList));
     }
 }
