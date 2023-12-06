@@ -3,14 +3,10 @@ package umc.spring.validation.validator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.apiPayload.code.status.ErrorStatus;
-import umc.spring.repository.FoodCategoryRepository;
 import umc.spring.service.FoodCategoryService.FoodCategoryCommandService;
 import umc.spring.validation.annotation.ExistCategories;
-
-import javax.validation.Constraint;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.lang.annotation.Annotation;
 import java.util.List;
 
 @Component

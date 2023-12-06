@@ -27,8 +27,8 @@ public class StoreQueryServiceImpl implements StoreQueryService{
 
     @Override
     public Page<Review> getReviewList(Long storeId, Integer page) {
-        Store store = storeRepository.findById(storeId).get();
-
+//        Store store = storeRepository.findById(storeId).get();
+        Store store = findStore(storeId).get();
         Page<Review> storePage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
         return storePage;
     }
