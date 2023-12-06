@@ -14,6 +14,7 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI UMCstudyAPI() {
+        // 기본 정보 설정 (제목, 설명, 버전)
         Info info = new Info()
                 .title("UMC Server WorkBook API")
                 .description("UMC Server WorkBook API 명세서")
@@ -23,6 +24,7 @@ public class SwaggerConfig {
 
         // API 요청 헤더에 인증정보 포함
         SecurityRequirement securityRequirement = new SecurityRequirement().addList(jwtSchemeName);
+
         // SecuritySchemes 등록
         Components components = new Components()
                 .addSecuritySchemes(jwtSchemeName, new SecurityScheme()
