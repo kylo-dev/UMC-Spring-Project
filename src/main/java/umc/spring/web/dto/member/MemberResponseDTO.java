@@ -27,4 +27,23 @@ public class MemberResponseDTO {
         Long missionId;
         LocalDateTime createdAt;
     }
+
+//    @Builder
+//    @Getter
+//    @NoArgsConstructor
+//    @AllArgsConstructor
+//    public static class ReviewPreViewListDTO {
+//
+//    }
+//
+//    @Builder
+//    @Getter
+//    @NoArgsConstructor
+//    @AllArgsConstructor
+//    public static class ReviewPreViewList{
+//        String ownerNickname;
+//        Float score;
+//        String body;
+//        LocalDateTime
+//    }
 }

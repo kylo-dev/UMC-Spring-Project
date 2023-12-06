@@ -67,7 +67,8 @@ public class StoreRestController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "access 토큰 모양이 이상함", content = @Content(schema = @Schema(implementation = ApiResponse.class)))
     })
     @Parameters({
-            @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다.!")
+            @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다.!"),
+            @Parameter(name = "page", description = "리뷰의 페이지 번호, query string 입니다.!")
     })
     public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistStore @PathVariable(name = "storeId") Long storeId,
                                                                              @CheckPage @RequestParam(name = "page") Integer page){
