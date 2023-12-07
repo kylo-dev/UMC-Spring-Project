@@ -10,6 +10,8 @@ import umc.spring.domain.Store;
 import umc.spring.repository.MissionRepository;
 import umc.spring.repository.StoreRepository;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -24,5 +26,10 @@ public class MissionQueryServiceImpl implements MissionQueryService{
         Store store = storeRepository.findById(storeId).get();
 
         return missionRepository.findAllByStore(store, PageRequest.of(page, 10));
+    }
+
+    @Override
+    public boolean existMission(Long missionId) {
+        return missionRepository.existsById(missionId);
     }
 }

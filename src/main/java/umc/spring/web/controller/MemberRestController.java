@@ -9,12 +9,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
-import umc.spring.apiPayload.code.status.ErrorStatus;
-import umc.spring.apiPayload.code.status.SuccessStatus;
 import umc.spring.converter.MemberConverter;
 import umc.spring.converter.MemberMissionConverter;
 import umc.spring.converter.ReviewConverter;
@@ -22,12 +19,10 @@ import umc.spring.domain.Member;
 import umc.spring.domain.Review;
 import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.MemberMission;
+import umc.spring.service.MemberMissionService.MemberMissionCommandService;
 import umc.spring.service.MemberService.MemberCommandService;
 import umc.spring.service.MemberService.MemberQueryService;
-import umc.spring.validation.annotation.CheckPage;
-import umc.spring.validation.annotation.ExistMember;
-import umc.spring.validation.annotation.ExistMission;
-import umc.spring.validation.annotation.ExistMissionStatus;
+import umc.spring.validation.annotation.*;
 import umc.spring.web.dto.member.MemberRequestDTO;
 import umc.spring.web.dto.member.MemberResponseDTO;
 import umc.spring.web.dto.review.ReviewResponseDTO;
@@ -43,6 +38,7 @@ public class MemberRestController {
 
     private final MemberCommandService memberCommandService;
     private final MemberQueryService memberQueryService;
+    private final MemberMissionCommandService memberMissionCommandService;
 
     @PostMapping("/")
     @Operation(summary = "회원 가입", description = "JoinDTO를 통해 회원가입 진행")
@@ -53,7 +49,7 @@ public class MemberRestController {
 
     @PostMapping("/missions")
     @Operation(summary = "맴버 미션 추가", description = "진행 중인 미션이 아니라면 미션 추가하기")
-    public ApiResponse<MemberResponseDTO.MissionResultDTO> missionPerform(@RequestBody @ExistMission MemberRequestDTO.MissionDTO request){
+    public ApiResponse<MemberResponseDTO.MissionResultDTO> missionPerform(@RequestBody @ExistChallengingMission MemberRequestDTO.MissionDTO request){
         MemberMission memberMission = memberCommandService.performMission(request);
         return ApiResponse.onSuccess(MemberConverter.toMissionResultDTO(memberMission));
     }
@@ -98,6 +94,26 @@ public class MemberRestController {
         Page<MemberMission> memberMissionList = memberQueryService.getMemberMissionList(memberId, status, page -1);
 
         return ApiResponse.onSuccess(MemberMissionConverter.toChallengingMissionPreViewListDTO(memberMissionList));
+    }
+
+    // 진행중인 미션 -> 진행 완료로 변경하기
+    @PatchMapping("/{memberId}/missions/{missionId}")
+    @Operation(summary = "진행 중인 미션 상태 진행 완료 상태로 바꾸는 API", description = "회원이 수행한 미션을 진행 완료 상태로 변경합니다.")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "access 토큰 만료", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "access 토큰 모양이 이상함", content = @Content(schema = @Schema(implementation = ApiResponse.class)))
+    })
+    @Parameters({
+            @Parameter(name = "memberId", description = "회원의 아이디, path variable 입니다.!"),
+            @Parameter(name = "missionId", description = "미션의 아이디, path variable 입니다.!")
+    })
+    public ApiResponse<MemberResponseDTO.MissionChangeResultDTO> completeMission(@ExistMember @PathVariable(name = "memberId") Long memberId,
+                                                                                 @ExistMission @PathVariable(name = "missionId") Long missionId){
+
+        MemberMission memberMission = memberMissionCommandService.completeMissionStatus(memberId, missionId);
+        return ApiResponse.onSuccess(MemberConverter.toMissionChangeResultDTO(memberMission));
     }
 
 }

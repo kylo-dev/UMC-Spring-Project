@@ -42,6 +42,8 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // MemberMission Error
     MEMBER_MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER_MISSION4001", "존재하지 않는 미션 상태입니다."),
+    MEMBER_MISSION_NOT_CHALLENGING(HttpStatus.BAD_REQUEST, "MEMBER_MISSION4002", "진행중인 미션이 아닙니다."),
+    MISSION_NOT_BELONGS_TO_MEMBER(HttpStatus.NOT_FOUND, "MEMBER_MISSION4003", "해당 미션은 회원님께 등록된 미션이 아닙니다."),
 
     // Page Error
     PAGE_RANGE_ERROR(HttpStatus.BAD_REQUEST, "PAGE4001", "적절한 페이지 번호가 아닙니다.");

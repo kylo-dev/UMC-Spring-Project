@@ -3,7 +3,6 @@ package umc.spring.web.dto.member;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import umc.spring.validation.annotation.ExistCategories;
-import umc.spring.validation.annotation.ExistMission;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

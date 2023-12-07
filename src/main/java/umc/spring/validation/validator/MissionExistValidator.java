@@ -3,19 +3,17 @@ package umc.spring.validation.validator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.apiPayload.code.status.ErrorStatus;
-import umc.spring.service.MemberMissionService.MemberMissionCommandService;
+import umc.spring.service.MissionService.MissionQueryService;
 import umc.spring.validation.annotation.ExistMission;
-import umc.spring.web.dto.member.MemberRequestDTO;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-
 @Component
 @RequiredArgsConstructor
-public class MissionExistValidator implements ConstraintValidator<ExistMission, MemberRequestDTO.MissionDTO> {
+public class MissionExistValidator implements ConstraintValidator<ExistMission, Long> {
 
-    private final MemberMissionCommandService memberMissionCommandService;
+    private final MissionQueryService missionQueryService;
 
     @Override
     public void initialize(ExistMission constraintAnnotation) {
@@ -23,14 +21,13 @@ public class MissionExistValidator implements ConstraintValidator<ExistMission, 
     }
 
     @Override
-    public boolean isValid(MemberRequestDTO.MissionDTO request, ConstraintValidatorContext context) {
-        boolean isValid = memberMissionCommandService.exsistMemberAndMissionOnStatus(request.getMemberId(), request.getMissionId());
+    public boolean isValid(Long missionId, ConstraintValidatorContext context) {
+        boolean valid = missionQueryService.existMission(missionId);
 
-        if(isValid){
+        if (!valid){
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(ErrorStatus.MISSION_ALREADY_STATUS.toString()).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(ErrorStatus.MISSION_NOT_FOUND.toString()).addConstraintViolation();
         }
-
-        return !isValid;
+        return valid;
     }
 }

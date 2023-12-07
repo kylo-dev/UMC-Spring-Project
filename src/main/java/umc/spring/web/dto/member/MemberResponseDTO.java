@@ -33,6 +33,17 @@ public class MemberResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
+    public static class MissionChangeResultDTO{
+        Long memberId;
+        Long missionId;
+        String missionStatus;
+        LocalDateTime createdAt;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class ChallengingMissionPreViewDTO {
 
         Long missionId;

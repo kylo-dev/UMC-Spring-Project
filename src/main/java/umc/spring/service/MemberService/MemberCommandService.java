@@ -10,4 +10,6 @@ public interface MemberCommandService {
 
     // MemberPrefer vs Member
     MemberMission performMission(MemberRequestDTO.MissionDTO request);
+
+
 }
