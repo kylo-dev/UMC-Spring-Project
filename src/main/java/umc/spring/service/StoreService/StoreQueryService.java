@@ -11,4 +11,6 @@ public interface StoreQueryService {
     Optional<Store> findStore(Long storeId);
 
     Page<Review> getReviewList(Long storeId, Integer page);
+
+    boolean existStore(Long storeId);
 }

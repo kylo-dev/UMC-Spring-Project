@@ -7,12 +7,8 @@ import umc.spring.repository.FoodCategoryRepository;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class FoodCategoryCommandServiceImpl implements FoodCategoryCommandService{
 
-    private final FoodCategoryRepository foodCategoryRepository;
-    @Override
-    public boolean exsistFoodCategory(Long foodCategoryId) {
-        return foodCategoryRepository.existsById(foodCategoryId);
-    }
+
 }

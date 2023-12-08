@@ -32,4 +32,9 @@ public class StoreQueryServiceImpl implements StoreQueryService{
         Page<Review> storePage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
         return storePage;
     }
+
+    @Override
+    public boolean existStore(Long storeId) {
+        return storeRepository.existsById(storeId);
+    }
 }

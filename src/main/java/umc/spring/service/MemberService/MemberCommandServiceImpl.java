@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class MemberCommandServiceImpl implements MemberCommandService{
 
     private final MemberRepository memberRepository;
@@ -34,7 +34,6 @@ public class MemberCommandServiceImpl implements MemberCommandService{
     private final MemberMissionRepository memberMissionRepository;
 
     @Override
-    @Transactional
     public Member joinMember(MemberRequestDTO.JoinDTO request) {
 
         /**
@@ -59,7 +58,6 @@ public class MemberCommandServiceImpl implements MemberCommandService{
     }
 
     @Override
-    @Transactional
     public MemberMission performMission(MemberRequestDTO.MissionDTO request) {
 
         // 유저 조회

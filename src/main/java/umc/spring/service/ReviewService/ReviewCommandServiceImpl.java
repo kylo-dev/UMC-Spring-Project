@@ -17,7 +17,7 @@ import umc.spring.web.dto.review.ReviewRequestDTO;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class ReviewCommandServiceImpl implements ReviewCommandService{
 
     private final MemberRepository memberRepository;
@@ -25,8 +25,7 @@ public class ReviewCommandServiceImpl implements ReviewCommandService{
     private final ReviewRepository reviewRepository;
 
     @Override
-    @Transactional
-    public Review registerReview(Long storedId, ReviewRequestDTO.RegisterDTO request) {
+    public Review registerReview(Long storedId, ReviewRequestDTO.RegisterReviewDTO request) {
 
         Review newReview = ReviewConverter.toReview(request);
 

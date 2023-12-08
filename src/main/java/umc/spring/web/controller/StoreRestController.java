@@ -43,7 +43,7 @@ public class StoreRestController {
     @PostMapping("/{storeId}/reviews")
     @Operation(summary = "리뷰 작성", description = "RegisterDTO를 통해 가게에 리뷰 작성하기")
     public ApiResponse<ReviewResponseDTO.RegisterResultDTO> registerReview(@PathVariable @ExistStore Long storeId,
-                                                                           @RequestBody @Valid ReviewRequestDTO.RegisterDTO request){
+                                                                           @RequestBody @Valid ReviewRequestDTO.RegisterReviewDTO request){
         Review review = reviewCommandService.registerReview(storeId, request);
         return ApiResponse.onSuccess(ReviewConverter.toRegisterReviewResultDTO(review));
     }
@@ -52,7 +52,7 @@ public class StoreRestController {
     @PostMapping("/{storeId}/missions")
     @Operation(summary = "가게 미션 추가", description = "RegisterDTO를 통해 가게에 미션 추가하기")
     public ApiResponse<StoreResponseDTO.RegisterMissionResultDTO> registerMission(@PathVariable Long storeId,
-                                                                                  @RequestBody MissionRequestDTO.RegisterDTO request){
+                                                                                  @RequestBody MissionRequestDTO.RegisterMissionDTO request){
         Mission mission = storeCommandService.registerMission(storeId, request);
         return ApiResponse.onSuccess(StoreConverter.toRegisterMissionResultDTO(mission));
     }
@@ -62,9 +62,8 @@ public class StoreRestController {
     @Operation(summary = "특정 가게의 리뷰 목록 조회 API", description = "특정 가게의 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. query string 으로 page 번호를 주세요.")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "access 토큰 만료", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "access 토큰 모양이 이상함", content = @Content(schema = @Schema(implementation = ApiResponse.class)))
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "STORE4001", description = "올바른 STOREID가 아닙니다.", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "PAGE4001", description = "PAGE 번호는 1이상의 수입니다.", content = @Content(schema = @Schema(implementation = ApiResponse.class)))
     })
     @Parameters({
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다.!"),

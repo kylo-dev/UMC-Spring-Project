@@ -15,7 +15,7 @@ import umc.spring.web.dto.store.StoreRequestDTO;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class StoreCommandServiceImpl implements StoreCommandService{
 
     private final StoreRepository storeRepository;
@@ -23,7 +23,6 @@ public class StoreCommandServiceImpl implements StoreCommandService{
     private final MissionRepository missionRepository;
 
     @Override
-    @Transactional
     public Store registerStore(Long regionId, StoreRequestDTO.RegisterRegionDTO request) {
         // DTO -> Entity
         Store newStore = StoreConverter.toStore(request);
@@ -39,8 +38,7 @@ public class StoreCommandServiceImpl implements StoreCommandService{
     }
 
     @Override
-    @Transactional
-    public Mission registerMission(Long storeId, MissionRequestDTO.RegisterDTO request) {
+    public Mission registerMission(Long storeId, MissionRequestDTO.RegisterMissionDTO request) {
 
         // 추가할 가게 조회
         Store store = storeRepository.findById(storeId).orElseThrow(
@@ -52,10 +50,5 @@ public class StoreCommandServiceImpl implements StoreCommandService{
         // 연관관계 설정 - 더티 체킹으로 업데이트 처리
         newMission.setStore(store);
         return missionRepository.save(newMission);
-    }
-
-    @Override
-    public boolean exsistStore(Long storeId) {
-        return storeRepository.existsById(storeId);
     }
 }

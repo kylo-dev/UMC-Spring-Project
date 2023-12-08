@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
+import umc.spring.apiPayload.code.ErrorReasonDTO;
 import umc.spring.converter.MissionConverter;
 import umc.spring.converter.ReviewConverter;
 import umc.spring.domain.Mission;
@@ -38,7 +39,7 @@ public class MissionRestController {
     // 미션 등록 API - 가게 정보 없이, 미션 생성 하는 API
     @PostMapping("/")
     @Operation(summary = "미션 추가", description = "RegisterDTO를 통해 미션 생성하기")
-    public ApiResponse<MissionResponseDTO.RegisterResultDTO> registerMission(@RequestBody MissionRequestDTO.RegisterDTO request){
+    public ApiResponse<MissionResponseDTO.RegisterResultDTO> registerMission(@RequestBody MissionRequestDTO.RegisterMissionDTO request){
         Mission mission = missionCommandService.registerMission(request);
         return ApiResponse.onSuccess(MissionConverter.toRegisterResultDTO(mission));
     }
@@ -48,9 +49,8 @@ public class MissionRestController {
     @Operation(summary = "특정 가게의 미션 목록 API", description = "특정 가게의 미션 목록을 조회하는 API이며, 페이징을 포함합니다. query string으로 page 번호를 주세요")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "access 토큰 만료", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "access 토큰 모양이 이상함", content = @Content(schema = @Schema(implementation = ApiResponse.class)))
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "STORE4001", description = "올바른 STOREDID를 주세요.", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "PAGE4001", description = "PAGE 번호는 1이상의 수입니다.", content = @Content(schema = @Schema(implementation = ApiResponse.class)))
     })
     @Parameters({
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다.!"),

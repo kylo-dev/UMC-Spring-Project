@@ -19,7 +19,7 @@ public class MissionConverter {
                 .build();
     }
 
-    public static Mission toMission(MissionRequestDTO.RegisterDTO request){
+    public static Mission toMission(MissionRequestDTO.RegisterMissionDTO request){
 
         /**
          * Mission 생성하기

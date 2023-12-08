@@ -5,5 +5,5 @@ import umc.spring.web.dto.mission.MissionRequestDTO;
 
 public interface MissionCommandService {
 
-    Mission registerMission(MissionRequestDTO.RegisterDTO request);
+    Mission registerMission(MissionRequestDTO.RegisterMissionDTO request);
 }

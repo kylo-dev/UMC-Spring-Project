@@ -12,15 +12,11 @@ import umc.spring.repository.MemberMissionRepository;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class MemberMissionCommandServiceImpl implements MemberMissionCommandService{
 
     private final MemberMissionRepository memberMissionRepository;
 
-    @Override
-    public boolean existMemberAndMissionOnStatus(Long memberId, Long missionId) {
-        return memberMissionRepository.existsByMemberIdAndMissionIdAndStatus(memberId, missionId);
-    }
 
     @Override
     @Transactional
