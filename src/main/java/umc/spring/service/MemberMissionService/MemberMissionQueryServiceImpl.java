@@ -16,4 +16,9 @@ public class MemberMissionQueryServiceImpl implements MemberMissionQueryService{
     public boolean existMemberAndMissionOnStatus(Long memberId, Long missionId) {
         return memberMissionRepository.existsByMemberIdAndMissionIdAndStatus(memberId, missionId);
     }
+
+    @Override
+    public boolean existMemberMissionId(Long memberMissionId) {
+        return memberMissionRepository.existsById(memberMissionId);
+    }
 }

@@ -31,7 +31,7 @@ public class MissionStatusExistValidator implements ConstraintValidator<ExistMis
 
         if (!valid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(ErrorStatus.MEMBER_MISSION_NOT_FOUND.toString()).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(ErrorStatus.MEMBER_MISSION_NOT_STATUS.toString()).addConstraintViolation();
         }
         return valid;
     }

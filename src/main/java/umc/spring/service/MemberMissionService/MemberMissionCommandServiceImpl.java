@@ -38,4 +38,15 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
         findMemberMission.changeStatus(MissionStatus.COMPLETE);
         return findMemberMission;
     }
+
+    @Override
+    public MemberMission completeMissionStatus(Long memberMissionId) {
+        MemberMission findMemberMission = memberMissionRepository.findById(memberMissionId).get();
+
+        if (findMemberMission.getStatus() != MissionStatus.CHALLENGING){
+            throw new MissionHandler(ErrorStatus.MEMBER_MISSION_NOT_CHALLENGING);
+        }
+        findMemberMission.changeStatus(MissionStatus.COMPLETE);
+        return findMemberMission;
+    }
 }

@@ -41,7 +41,7 @@ public enum ErrorStatus implements BaseErrorCode {
     MISSION_ALREADY_STATUS(HttpStatus.BAD_REQUEST, "MISSION4002", "이미 진행 중인 미션입니다."),
 
     // MemberMission Error
-    MEMBER_MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER_MISSION4001", "존재하지 않는 미션 상태입니다."),
+    MEMBER_MISSION_NOT_STATUS(HttpStatus.NOT_FOUND, "MEMBER_MISSION4001", "존재하지 않는 미션 상태입니다."),
     MEMBER_MISSION_NOT_CHALLENGING(HttpStatus.BAD_REQUEST, "MEMBER_MISSION4002", "진행중인 미션이 아닙니다."),
     MISSION_NOT_BELONGS_TO_MEMBER(HttpStatus.NOT_FOUND, "MEMBER_MISSION4003", "해당 미션은 회원님께 등록된 미션이 아닙니다."),
 

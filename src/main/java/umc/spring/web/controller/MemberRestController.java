@@ -96,7 +96,7 @@ public class MemberRestController {
     }
 
     // 진행중인 미션 -> 진행 완료로 변경하기
-    @PatchMapping("/{memberId}/missions/{missionId}")
+    @PatchMapping("/{memberId}/missions/{missionId}/v1")
     @Operation(summary = "진행 중인 미션 상태 진행 완료 상태로 바꾸는 API", description = "회원이 수행한 미션을 진행 완료 상태로 변경합니다.")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
@@ -114,4 +114,19 @@ public class MemberRestController {
         return ApiResponse.onSuccess(MemberConverter.toMissionChangeResultDTO(memberMission));
     }
 
+    // 진행중인 미션 -> 진행 완료로 변경하기
+    @PatchMapping("/missions/{memberMissionId}")
+    @Operation(summary = "진행 중인 미션 상태 진행 완료 상태로 바꾸는 API", description = "회원이 수행한 미션을 진행 완료 상태로 변경합니다.")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "MEMBER4001", description = "올바른 MEMBER_MISSION_ID가 아닙니다.", content = @Content(schema = @Schema(implementation = ApiResponse.class)))
+    })
+    @Parameters({
+            @Parameter(name = "memberMissionId", description = "MemberMission의 ID, path variable 입니다.!")
+    })
+    public ApiResponse<MemberResponseDTO.MissionChangeResultDTO> completeMission2(@ExistMemberMission @PathVariable(name = "memberMissionId") Long memberMissionId){
+
+        MemberMission memberMission = memberMissionCommandService.completeMissionStatus(memberMissionId);
+        return ApiResponse.onSuccess(MemberConverter.toMissionChangeResultDTO(memberMission));
+    }
 }
