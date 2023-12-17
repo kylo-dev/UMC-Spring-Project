@@ -1,18 +1,17 @@
 package umc.spring.validation.annotation;
 
-import umc.spring.validation.validator.MissionExistValidator;
-
+import umc.spring.validation.validator.MemberExistValidator;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = MissionExistValidator.class)
+@Constraint(validatedBy = MemberExistValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ExistMission {
+public @interface ExistMember {
 
-    String message() default "해당하는 미션이 존재하지 않습니다.";
+    String message() default "해당하는 회원이 존재하지 않습니다.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

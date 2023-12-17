@@ -1,6 +1,9 @@
 package umc.spring.service.MemberMissionService;
 
-public interface MemberMissionCommandService {
+import umc.spring.domain.mapping.MemberMission;
 
-    boolean exsistMemberAndMissionOnStatus(Long memberId, Long missionId);
+public interface MemberMissionCommandService {
+    MemberMission completeMissionStatus(Long memberId, Long missionId);
+
+    MemberMission completeMissionStatus(Long memberMissionId);
 }

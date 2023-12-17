@@ -11,7 +11,7 @@ public class MissionRequestDTO {
 
     @Getter
     @Schema(description = "미션 등록 DTO")
-    public static class RegisterDTO{
+    public static class RegisterMissionDTO{
 
         @Schema(description = "보상 포인트")
         Integer reward;

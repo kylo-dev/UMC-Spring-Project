@@ -27,6 +27,16 @@ public class MemberConverter {
                 .build();
     }
 
+    // 미션 진행 상태 변경
+    public static MemberResponseDTO.MissionChangeResultDTO toMissionChangeResultDTO(MemberMission memberMission){
+        return MemberResponseDTO.MissionChangeResultDTO.builder()
+                .memberId(memberMission.getMember().getId())
+                .missionId(memberMission.getMission().getId())
+                .missionStatus(memberMission.getStatus().toString())
+                .createdAt(LocalDateTime.now())
+                .build();
+    }
+
     public static Member toMember(MemberRequestDTO.JoinDTO request){
 
         Gender gender = null;
