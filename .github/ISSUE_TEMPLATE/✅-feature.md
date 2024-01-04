@@ -7,23 +7,17 @@ assignees: ''
 
 ---
 
-## Issue: ✅FEATURE
-Feature 작업 사항을 입력해주세요
+# Issue: ✅FEATURE
 
----
+Feature 작업 사항을 입력해주세요
 </br>
 
-### Description
----
+## Description
 설명을 작성하세요
 
-### Todo
-
----
+## Todo
 - [ ] todo
 - [ ] todo
 
-### ETC
-
----
+## ETC
 기타사항
