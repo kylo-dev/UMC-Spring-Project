@@ -8,7 +8,7 @@ import umc.spring.domain.Mission;
 import umc.spring.domain.common.BaseEntity;
 import umc.spring.domain.enums.MissionStatus;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Getter

@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
@@ -26,7 +27,6 @@ import umc.spring.web.dto.review.ReviewRequestDTO;
 import umc.spring.web.dto.review.ReviewResponseDTO;
 import umc.spring.web.dto.store.StoreResponseDTO;
 
-import javax.validation.Valid;
 
 @Tag(name = "store", description = "Store API")
 @RestController
@@ -40,7 +40,7 @@ public class StoreRestController {
     private final ReviewCommandService reviewCommandService;
 
     // 가게에 리뷰 추가 API
-    @PostMapping("/{storeId}/reviews")
+    @PostMapping(value = "/{storeId}/reviews", consumes = "multipart/form-data")
     @Operation(summary = "리뷰 작성", description = "RegisterDTO를 통해 가게에 리뷰 작성하기")
     public ApiResponse<ReviewResponseDTO.RegisterResultDTO> registerReview(@PathVariable @ExistStore Long storeId,
                                                                            @RequestBody @Valid ReviewRequestDTO.RegisterReviewDTO request){

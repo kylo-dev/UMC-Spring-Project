@@ -3,8 +3,8 @@ package umc.spring.validation.annotation;
 import umc.spring.validation.validator.ChallengingMissionCheckValidator;
 import umc.spring.validation.validator.MemberMissionExistValidator;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented

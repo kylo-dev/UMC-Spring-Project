@@ -2,7 +2,7 @@ package umc.spring.web.dto.store;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
 
 public class StoreRequestDTO {
 

@@ -1,8 +1,8 @@
 package umc.spring.validation.annotation;
 
 import umc.spring.validation.validator.MemberExistValidator;
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented

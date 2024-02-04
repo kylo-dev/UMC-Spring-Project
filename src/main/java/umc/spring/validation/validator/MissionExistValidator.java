@@ -6,8 +6,8 @@ import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.service.MissionService.MissionQueryService;
 import umc.spring.validation.annotation.ExistMission;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 @Component
 @RequiredArgsConstructor

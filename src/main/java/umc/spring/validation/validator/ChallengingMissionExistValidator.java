@@ -8,8 +8,8 @@ import umc.spring.service.MemberMissionService.MemberMissionQueryService;
 import umc.spring.validation.annotation.ExistChallengingMission;
 import umc.spring.web.dto.member.MemberRequestDTO;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 
 @Component

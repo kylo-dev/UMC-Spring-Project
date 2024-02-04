@@ -1,20 +1,21 @@
 package umc.spring.domain;
 
-import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.common.BaseEntity;
 
+import jakarta.persistence.*;
+
 @Entity
-@Getter
 @Builder
+@Getter
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-public class FoodCategory extends BaseEntity {
+public class Uuid extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 15)
-    private String name;
+    @Column(unique = true)
+    private String uuid;
 }

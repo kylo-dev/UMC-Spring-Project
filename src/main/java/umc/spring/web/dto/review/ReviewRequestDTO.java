@@ -1,11 +1,12 @@
 package umc.spring.web.dto.review;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
 
 public class ReviewRequestDTO {
 
@@ -25,5 +26,7 @@ public class ReviewRequestDTO {
         @DecimalMin("0.0")
         @DecimalMax("5.0")
         Float score;
+
+        MultipartFile reviewPicture;
     }
 }

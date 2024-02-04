@@ -1,10 +1,9 @@
 package umc.spring.validation.annotation;
 
-import umc.spring.validation.validator.CategoriesExistValidator;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import umc.spring.validation.validator.StoreExistValidator;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
@@ -14,6 +13,8 @@ import java.lang.annotation.*;
 public @interface ExistStore {
 
     String message() default "해당하는 가게가 존재하지 않습니다.";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }
